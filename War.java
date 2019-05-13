@@ -10,6 +10,8 @@ public class War{
 	private static Stack<Card> pile2 = new Stack<Card>();
 	private static Stack<Card> warPile = new Stack<Card>();
 	public static int round = 1;
+	public static boolean verbose = false;
+	public static boolean turn = false;
 
 	//this is the start of our game
 	public static void war(){
@@ -24,15 +26,17 @@ public class War{
 		while(true){
 			//check if the game is over
 			gameOverCheck();
-			System.out.print("Player 1's hand size:"); 
-			System.out.print(player1.size() + "\t");
-			System.out.print("Player 1's pile size:"); 
-			System.out.println(pile1.size());
+			if(verbose){
+				System.out.print("Player 1's hand size:"); 
+				System.out.print(player1.size() + "\t");
+				System.out.print("Player 1's pile size:"); 
+				System.out.println(pile1.size());
 
-			System.out.print("Player 2's hand size:");
-			System.out.print(player2.size() + "\t");
-			System.out.print("Player 1's pile size:"); 
-			System.out.println(pile2.size() + "\n");
+				System.out.print("Player 2's hand size:");
+				System.out.print(player2.size() + "\t");
+				System.out.print("Player 1's pile size:"); 
+				System.out.println(pile2.size() + "\n");
+			}
 
 			//if the game is not over, each player should play their next card
 			Card player1Card = player1.pop();
@@ -163,10 +167,13 @@ public class War{
 			player1.push(deck.pop());
 			player2.push(deck.pop());
 		}
-		/*System.out.println("Player 1's hand:");//show each players hands
-		System.out.println(player1.toString());
-		System.out.println("Player 2's hand:");
-		System.out.println(player2.toString());*/
+		//show each players hands
+		if(verbose){
+			System.out.println("Player 1's hand:");
+			System.out.println(player1.toString());
+			System.out.println("Player 2's hand:");
+			System.out.println(player2.toString());
+		}
 	}
 
 	//Creates our deck
@@ -184,6 +191,17 @@ public class War{
 	//Our main class initiating the deck and starting the game
 	public static void main(String[] args){
 		System.out.println("Welcome to the game of War");
+
+		System.out.println("If you would like to enable Verbose mode, Enter V, if not, just press enter");
+		Scanner scanner = new Scanner(System.in);
+		String input = scanner.nextLine();
+		if(input.equals("V")){
+			verbose = true;
+		}
+		else if(input.isEmpty()){
+			verbose = false;
+		}
+		scanner.close();
 		createDeck();
 		war();
 	}
