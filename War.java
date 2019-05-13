@@ -15,14 +15,15 @@ public class War{
 
 	//this is the start of our game
 	public static void war(){
-		System.out.print("Begin playing!");
 		deal();
+		System.out.print("Begin playing! ");
 		play();
 	}
 	//play until one of the players has no cards
 	public static void play(){
 		//result is the result of comparing our cards
 		int result;
+
 		while(true){
 			//check if the game is over
 			gameOverCheck();
